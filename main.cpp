@@ -11,16 +11,16 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
-	char ans = 'n';
+	char ans = 'n'; // ответ пользователя 
 	do
 	{
 		input inp;
 		try
 		{
 			if (argc == 1)
-				inp = GetInputDataFromDialog();
+				inp = GetInputDataFromDialog(); // получения данных во время диалога с пользователем
 			else
-				inp = GetInputDataFromArgs(argc, argv);
+				inp = GetInputDataFromArgs(argc, argv); // получения данных из параметров командной строки
 		}
 		catch (CryptoExceptions& e)
 		{
@@ -53,11 +53,11 @@ int main(int argc, char * argv[])
 		delete[] buffer;
 		if (argc == 1)
 		{
-			cout << "\nOnce more?(y/n)\n";
+			cout << "\nOnce more?(y/n)\n"; // запрос на повторное выполнение
 			cin >> ans;
 		}
 	}
-	while (ans == 'y');
+	while (ans == 'y');  // выполняется пока пользователь отвечает "y"
 	return 0;
 }
 

@@ -15,13 +15,13 @@ bool IsInteger(const char * str)
 input GetInputDataFromArgs(int argc, char * argv[])
 {
 	input result;
-	if (argc != 4)
+	if (argc != 4) // проверка количества аргументов
 		throw CryptoExceptions(CryptoExceptions::InvalidArgNumber);
-	if (((argv[1][0] != '1') && (argv[1][0] != '2')) || (argv[1][1] != '\0'))
+	if (((argv[1][0] != '1') && (argv[1][0] != '2')) || (argv[1][1] != '\0')) // проверка вида шифра 
 		throw CryptoExceptions(CryptoExceptions::InvalidCipherType);
-	if (((argv[2][0] != 'e') && (argv[2][0] != 'd')) || (argv[2][1] != '\0'))
+	if (((argv[2][0] != 'e') && (argv[2][0] != 'd')) || (argv[2][1] != '\0')) // проверка режима работы
 		throw CryptoExceptions(CryptoExceptions::InvalidOperationMode);
-	if (!IsInteger(argv[3]))
+	if (!IsInteger(argv[3]))  // проверка ключа
 		throw CryptoExceptions(CryptoExceptions::InvalidKeyFormat);
 	result.cipherType = argv[1][0];
 	result.operationMode = argv[2][0];
@@ -33,17 +33,17 @@ input GetInputDataFromDialog()
 {
 	input result;
 	string temp;
-	cout << "Select type of cipher (1 - ShiftCipher, 2 - SubstitutionCipher): \n";
+	cout << "Select type of cipher (1 - ShiftCipher, 2 - SubstitutionCipher): \n"; // вид шифр
 	cin >> temp;
 	if (((temp[0] != '1') && (temp[0] != '2')) || (temp[1] != '\0'))
 		throw CryptoExceptions(CryptoExceptions::InvalidCipherType);
 	result.cipherType = temp[0];
-	cout << "Select operation mode. (e - Encrypt, d - Decrypt): \n";
+	cout << "Select operation mode. (e - Encrypt, d - Decrypt): \n"; // режим работы
 	cin >> temp;
 	if (((temp[0] != 'e') && (temp[0] != 'd')) || (temp[1] != '\0'))
 		throw CryptoExceptions(CryptoExceptions::InvalidOperationMode);
 	result.operationMode = temp[0];
-	cout << "Enter the key:\n";
+	cout << "Enter the key:\n"; // ключ
 	cin >> temp;
 	if (!IsInteger(temp.c_str()))
 		throw CryptoExceptions(CryptoExceptions::InvalidKeyFormat);
