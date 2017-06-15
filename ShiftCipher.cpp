@@ -17,29 +17,23 @@
 	}
 	char * ShiftCipher::shift(char * str)
 	{
-		key %= 26;
+	  key %= 26;
 		for (int i = 0; str[i] != '\0'; i++)
 		{
-			if ((str[i] >= 'a') && (str[i] <= 'z')) // Для нижнего регистра
+			int upperCaseShift = -1; // -1 - если не является буквой
+			if ((str[i] >= 'a') && (str[i] <= 'z'))
+				upperCaseShift = 0;
+			if ((str[i] >= 'A') && (str[i] <= 'Z'))
+				upperCaseShift = 'a' - 'A';
+			if (upperCaseShift != -1)
 			{
 				unsigned char ch = str[i];
 				ch += key;
-				if (ch > 'z')
+				if (ch > ('z' - upperCaseShift))
 					ch -= 26;
-				if (ch < 'a')
-					ch += 26;
-				str[i] = ch;
-			}
-			if ((str[i] >= 'A') && (str[i] <= 'Z')) // Для верхнего регистра
-			{
-				unsigned char ch = str[i];
-				ch += key;
-				if (ch > 'Z')
-					ch -= 26;
-				if (ch < 'A')
+				if (ch < ('a' - upperCaseShift))
 					ch += 26;
 				str[i] = ch;
 			}
 		}
-		return str;
 	}
